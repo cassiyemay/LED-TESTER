@@ -9,7 +9,7 @@ setup(name="assignment3",
       license="GPL3",
       packages=['src'],
       entry_points={
-          'console_scripts':['test=src.main:main']
+          'console_scripts':['ledtester=src.main:start']
           },
       install_requires=[
           'numpy',
