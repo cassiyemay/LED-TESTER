@@ -9,8 +9,8 @@ def test_1():
 def test_count():
     line = "turn, on, 0, 0, through, 9, 9"
     line = "turn, off, 0, 0, through, 9, 9"
-    res = count(line)
-    eq_(res, 0, "{}".format(res))
+    res = count()
+    eq_(res,400410, "{}".format(res))
     
     
     

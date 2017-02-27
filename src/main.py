@@ -7,13 +7,7 @@ import urllib.request
 
 import argparse
 import itertools
-from pprint import pprint
 
-parser = argparse.ArgumentParser()
-
-parser.add_argument('--input', help = 'input help', default=False)
-args = parser.parse_args()
-filename = args.input
 
 #read the file from input url in terminal
 def read_file(filename):
@@ -37,7 +31,6 @@ def readline():
 def count():
     with open('assign3.txt','r') as fh:
         num = int(fh.readline())
-        print(num)
         a = [[False]* num for _ in range(num)]
         for line in fh:
             line = line.replace(","," ")
@@ -82,7 +75,11 @@ def count():
         
     
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input', help = 'input help', default=False)
+    args = parser.parse_args()
+    filename = args.input
     read_file(filename);
-    print(readline());
+    readline();
     print("Count:",count());
 
