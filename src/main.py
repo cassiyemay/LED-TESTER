@@ -7,7 +7,7 @@ import urllib.request
 
 import argparse
 import itertools
-from itertools import chain
+from pprint import pprint
 
 parser = argparse.ArgumentParser()
 
@@ -24,52 +24,65 @@ def read_file(filename):
     print("read from:", filename)
     return f
 
-#only retrieve the command and number
+#print the length of the file
 def readline():
     with open('assign3.txt','r') as fh:
-        f1=open('assign.txt','w')
+        num=0
         for line in fh.readlines():
-            values = line.strip().split(' ')
-            if values[0]=='turn':
-                a= values[0:2],values[2].split(','),values[-1].split(',')
-                list= a[0][0]+" "+a[0][1]
-                l1= list, values[2].split(','),values[-1].split(',')
-                f1.write(str(l1)+"\n")
-            elif values[0] =="switch":
-                c= values[0]
-                l2 = c,values[1].split(','),values[-1].split(',')
-                f1.write(str(l2)+"\n")
-        return f1
-#count the number of lights lighting                
-def count():
-    with open("assign.txt","r") as fh1:
-        for line in fh1.readlines():
-            print(line[:-1])
-            
-                        
-                
-
-               
-        
-        
-               
-                
-                
-                
-                
-            
-         
-                    
+            num+=1
+        return num
                 
     
-        
-        
-          
-   
+#count the number of led lights lighting
+def count():
+    with open('assign3.txt','r') as fh:
+        num = int(fh.readline())
+        print(num)
+        a = [[False]* num for _ in range(num)]
+        for line in fh:
+            line = line.replace(","," ")
+            values = line.strip().split(' ')
+            if values[0] =='turn':
+                x1 = int("".join(values[2].split()))
+                y1 = int("".join(values[3].split()))
+                x2 = int("".join(values[5].split()))
+                y2 = int("".join(values[6].split()))
+                if  x1 <0:
+                    x1=0
+                if x2 > num:
+                    x2=num-1
+                if values[1] == 'on':
+                    for i in range(x1,x2+1):
+                        for j in range(y1,y2+1):
+                            a[i][j]=True
+                if values[1] == 'off':
+                    for i in range(x1,x2+1):
+                        for j in range(y1,y2+1):
+                            a[i][j]=False
+            if values[0] == 'switch':
+                x1 = int("".join(values[1].split()))
+                y1 = int("".join(values[2].split()))
+                x2 = int("".join(values[4].split()))
+                y2 = int("".join(values[5].split()))
+                if  x1 <0:
+                    x1=0
+                if x2 > num:
+                    x2=num-1
+                for i in range(x1,x2+1):
+                        for j in range(y1,y2+1):
+                            if a[i][j]==True:
+                                a[i][j]=False
+                            else:
+                                a[i][j]=True
+    lightOn = 0
+    for i in range(num):
+        lightOn += sum(a[i])
+    return lightOn
+                    
         
     
 if __name__ == '__main__':
     read_file(filename);
-    readline();
-    count();
+    print(readline());
+    print("Count:",count());
 
