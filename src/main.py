@@ -21,22 +21,27 @@ def read_file(filename):
     return f
 
 #print the length of the file
-def countline():
+def readline():
     with open('assign3.txt','r') as fh:
         num=0
         for line in fh.readlines():
             num+=1
         return num
-                
     
-#count the number of led lights lighting
-def count():
+#get the each file size.               
+def size():
     with open('assign3.txt','r') as fh:
-        #read the first line number 
-        num = int(fh.readline())
-        # set the a2d list all elements for false
-        a = [[False]* num for _ in range(num)]
-        #read each line into one list
+        #read the first line number and get the size
+        size= int(fh.readline())  
+        return size
+    
+#get the true values in a2d list after loop.
+def count():
+    num = size()
+    # set the a2d list all elements for false
+    a = [[False]* num for _ in range(num)]
+    #read each line into one list
+    with open('assign3.txt','r') as fh:
         for line in fh:
             line = line.replace(","," ")
             values = line.strip().split(' ')
@@ -47,7 +52,7 @@ def count():
                 x2 = int("".join(values[5].split()))
                 y2 = int("".join(values[6].split()))
                 # set if the x1 is negative, x1 is zero
-                #if x2 is greater than num, x2 is equal to (num-1)
+                #if x2 is greater than size, x2 is equal to (size-1)
                 if  x1 <0:
                     x1=0
                 if x2 > num:
@@ -57,7 +62,7 @@ def count():
                     for i in range(x1,x2+1):
                         for j in range(y1,y2+1):
                             a[i][j]=True
-                #when command line is turn off, the element into a do not change
+                #when command line is turn off, the element in a2d list do nothing
                 if values[1] == 'off':
                     for i in range(x1,x2+1):
                         for j in range(y1,y2+1):
@@ -78,9 +83,16 @@ def count():
                                 a[i][j]=False
                             else:
                                 a[i][j]=True
-    #count the number of true in a, which is the number of lights lighting                           
+            else:
+                continue
+        return a
+#count the number of true in a, which is the number of lights lighting
+def lightOn():                           
     lightOn = 0
+    num =size()
+    a=count()
     for i in range(num):
+        # get the total true values 
         lightOn += sum(a[i])
     return lightOn
                     
@@ -92,8 +104,10 @@ def start():
     args = parser.parse_args()
     filename = args.input
     read_file(filename);
-    countline();
-    print("Count:",count());   
+    readline();
+    size();
+    count();
+    print("Count:",lightOn());   
 if __name__ == '__main__':
     start()
 
