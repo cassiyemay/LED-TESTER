@@ -7,7 +7,7 @@ For example:
      Turn on 0,0 through 999,999 would turn on every lights    
      switch 0,0 through 999,0 would toggle the frist line of 1000 lights, turning off the ones that were on, and turn on the ones that were off.
      
-     
+     ![](LED-TESTER/img-folder/ec2.png)
                                                                         
                                                                                                                                                
                                                                                         
