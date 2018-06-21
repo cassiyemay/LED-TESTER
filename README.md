@@ -9,7 +9,7 @@ For example:
      
    ![outcome on EC2](img-folder/ec2.png)
    
-    ![outcome on local shell](img-folder/local.png)
+   ![outcome on local shell](img-folder/local.png)
    
                                                                         
                                                                                                                                                
